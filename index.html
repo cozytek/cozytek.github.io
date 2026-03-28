@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozytek</title>
+  <style>
+    :root {
+      --bg: #f6f1e7;
+      --grid: rgba(22, 22, 22, 0.03);
+      --line: rgba(22, 22, 22, 0.14);
+      --text: #1f1f1f;
+      --muted: #66625c;
+
+      --blue: #62c3ea;
+      --green: #69c86f;
+      --red: #f06554;
+      --yellow: #f7bb27;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 18% 14%, rgba(247, 187, 39, 0.12), transparent 0 14%),
+        radial-gradient(circle at 85% 78%, rgba(247, 187, 39, 0.09), transparent 0 15%),
+        radial-gradient(circle at 20% 75%, rgba(98, 195, 234, 0.09), transparent 0 18%),
+        radial-gradient(circle at 55% 56%, rgba(240, 101, 84, 0.06), transparent 0 13%),
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: auto, auto, auto, auto, 34px 34px, 34px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.32), transparent 20%, transparent 80%, rgba(255, 255, 255, 0.2)),
+        radial-gradient(circle at center, transparent 56%, rgba(255, 255, 255, 0.14));
+      pointer-events: none;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .scene::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(820px, 82vw);
+      height: min(320px, 42vh);
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(246, 241, 231, 0.97) 0%, rgba(246, 241, 231, 0.93) 56%, rgba(246, 241, 231, 0) 100%);
+    }
+
+    .shape,
+    .line,
+    .bit,
+    .ring {
+      position: absolute;
+    }
+
+    .shape {
+      width: clamp(30px, 4vw, 50px);
+      aspect-ratio: 1;
+      opacity: 0.88;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.035);
+    }
+
+    .shape.yellow-a {
+      background: var(--yellow);
+      top: 34px;
+      left: 20px;
+    }
+
+    .shape.green-a {
+      background: var(--green);
+      top: 96px;
+      right: 28%;
+    }
+
+    .shape.blue-a {
+      background: var(--blue);
+      top: 212px;
+      left: -10px;
+    }
+
+    .shape.green-b {
+      background: var(--green);
+      bottom: 62px;
+      left: 24%;
+    }
+
+    .shape.red-a {
+      background: var(--red);
+      bottom: 40px;
+      right: 30%;
+    }
+
+    .shape.yellow-b {
+      background: var(--yellow);
+      bottom: 78px;
+      right: -10px;
+    }
+
+    .line {
+      background: var(--line);
+    }
+
+    .line.v1 {
+      top: 76px;
+      left: 22%;
+      width: 1px;
+      height: 92px;
+    }
+
+    .line.h1 {
+      top: 104px;
+      right: 12%;
+      width: 148px;
+      height: 1px;
+    }
+
+    .line.v2 {
+      top: 204px;
+      left: 61%;
+      width: 1px;
+      height: 94px;
+    }
+
+    .line.h2 {
+      top: 228px;
+      right: 18%;
+      left: auto;
+      width: 148px;
+      height: 1px;
+    }
+
+    .line.h3 {
+      bottom: 126px;
+      left: 14px;
+      width: 142px;
+      height: 1px;
+    }
+
+    .line.v3 {
+      bottom: 34px;
+      right: 35%;
+      width: 1px;
+      height: 92px;
+    }
+
+    .line.h4 {
+      bottom: 70px;
+      right: 16%;
+      width: 114px;
+      height: 1px;
+    }
+
+    .bit {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: rgba(31, 31, 31, 0.42);
+      white-space: nowrap;
+    }
+
+    .bit.b1 {
+      top: 146px;
+      left: 58px;
+    }
+
+    .bit.b2 {
+      top: 198px;
+      right: 138px;
+      left: auto;
+    }
+
+    .bit.b3 {
+      bottom: 80px;
+      left: 16px;
+    }
+
+    .bit.b4 {
+      right: 38px;
+      bottom: 146px;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.1em;
+    }
+
+    .ring {
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(31, 31, 31, 0.22);
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .ring.r1 {
+      top: 72px;
+      left: 31%;
+    }
+
+    .ring.r2 {
+      right: 24%;
+      top: 202px;
+      bottom: auto;
+    }
+
+    .ring.r3 {
+      bottom: 54px;
+      left: 44%;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      padding: 24px 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 7vw, 66px);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.04;
+      text-wrap: balance;
+    }
+
+    .subtitle {
+      margin: 14px auto 0;
+      max-width: 560px;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.55;
+      color: var(--muted);
+      text-wrap: balance;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 16px;
+      }
+
+      .shape {
+        width: 28px;
+      }
+
+      .card {
+        padding: 20px 10px;
+      }
+
+      .subtitle {
+        max-width: 30ch;
+      }
+
+      .line.h1,
+      .line.h2,
+      .line.h3,
+      .line.h4 {
+        width: 88px;
+      }
+
+      .line.v1,
+      .line.v2,
+      .line.v3 {
+        height: 64px;
+      }
+
+      .shape.green-a {
+        right: 20%;
+      }
+
+      .shape.green-b {
+        left: 26%;
+      }
+
+      .shape.red-a {
+        right: 26%;
+      }
+
+      .bit {
+        font-size: 10px;
+        letter-spacing: 0.08em;
+      }
+
+      .bit.b1 {
+        top: 134px;
+        left: 36px;
+      }
+
+      .bit.b2 {
+        top: 190px;
+        right: 26px;
+      }
+
+      .bit.b3 {
+        bottom: 72px;
+      }
+
+      .bit.b4 {
+        right: 24px;
+        bottom: 132px;
+      }
+
+      .line.h2,
+      .line.v2,
+      .shape.red-a,
+      .ring.r2 {
+        display: none;
+      }
+
+      .scene::after {
+        width: 94vw;
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="shape yellow-a"></div>
+    <div class="shape green-a"></div>
+    <div class="shape blue-a"></div>
+    <div class="shape green-b"></div>
+    <div class="shape red-a"></div>
+    <div class="shape yellow-b"></div>
+
+    <div class="line v1"></div>
+    <div class="line h1"></div>
+    <div class="line v2"></div>
+    <div class="line h2"></div>
+    <div class="line h3"></div>
+    <div class="line v3"></div>
+    <div class="line h4"></div>
+
+    <div class="bit b1">00101101</div>
+    <div class="bit b2">10110010</div>
+    <div class="bit b3">11001010</div>
+    <div class="bit b4">1011</div>
+
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+  </div>
+
+  <main class="card">
+    <h1>Cozytek</h1>
+    <p class="subtitle">
+      Thoughtful software for learning, building, and creativity.
+    </p>
+  </main>
+</body>
+</html>
