@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozytek Accessibility</title>
+  <style>
+    :root {
+      --bg: #f6f1e7;
+      --grid: rgba(22, 22, 22, 0.03);
+      --text: #1f1f1f;
+      --muted: #66625c;
+      --link: #1f1f1f;
+      --card: rgba(255,255,255,0.42);
+      --border: rgba(22,22,22,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 34px 34px;
+      padding: 40px 20px 60px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .toplink:hover {
+      color: var(--text);
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 18px;
+      padding: 28px 22px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .updated {
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-size: 14px;
+    }
+
+    h2 {
+      margin-top: 28px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    p, li {
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="toplink" href="/">← Back to Cozytek</a>
+
+    <main class="panel">
+      <h1>Accessibility</h1>
+      <div class="updated">Last updated: March 30, 2026</div>
+
+      <p>
+        Cozytek aims to make its website and products more accessible and usable for a broad range
+        of people and situations.
+      </p>
+
+      <h2>Current Approach</h2>
+      <p>
+        This website is designed with semantic HTML, responsive layouts, readable text sizing,
+        and straightforward navigation. Cozytek aims to follow practical accessibility best
+        practices as the site evolves.
+      </p>
+
+      <h2>Conformance Status</h2>
+      <p>
+        This website has not yet undergone a formal accessibility audit. Cozytek is working toward
+        broadly accessible patterns informed by WCAG guidance, but full conformance has not been
+        independently assessed.
+      </p>
+
+      <h2>Known Limitations</h2>
+      <p>
+        As a lightweight static site, accessibility improvements may be made incrementally over time.
+        If a future feature or page creates an accessibility barrier, Cozytek intends to address it
+        as part of ongoing site updates.
+      </p>
+
+      <h2>Feedback</h2>
+      <p>
+        A dedicated accessibility contact method is not currently published on this website.
+        Where a product-specific support option is available, that is the best current path for
+        reporting accessibility issues related to that product.
+      </p>
+    </main>
+  </div>
+</body>
+</html>
